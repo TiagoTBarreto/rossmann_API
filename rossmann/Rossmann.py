@@ -175,7 +175,7 @@ class Rossmann (object):
 
               # join pred into the original data
               original_data['prediction'] = np.expm1(pred)
-              original_data['prediction'] = original_data['prediction'].apply(lambda x: np.round(x, 2))
+              original_data['prediction'] = int(original_data['prediction'])
               original_data = original_data[['store','prediction']].groupby('store').sum().reset_index()
 
               return original_data.to_json(orient = 'records', date_format = 'iso')
