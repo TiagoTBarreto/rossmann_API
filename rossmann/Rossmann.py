@@ -182,7 +182,8 @@ class Rossmann (object):
               # Converter os valores arredondados para inteiros
               original_data['prediction'] = original_data['prediction'].astype(int)
 
-              original_data = original_data[['store','prediction']].groupby('store').sum().reset_index()
+              original_data1 = original_data[['store','prediction']].groupby('store').sum().reset_index()
+              original_data1['assortment'] = original_data['assortment']
 
-              return original_data.to_json(orient = 'records', date_format = 'iso')
+              return original_data1.to_json(orient = 'records', date_format = 'iso')
 
