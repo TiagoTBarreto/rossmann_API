@@ -176,5 +176,13 @@ class Rossmann (object):
               # join pred into the original data
               original_data['prediction'] = np.expm1(pred)
 
-              return original_data.to_json(orient = 'records', date_format = 'iso')
+              # Arredondar os valores para duas casas decimais
+              original_data['prediction'] = original_data['prediction'].round(2)
+
+              # Converter os valores arredondados para inteiros
+              original_data['prediction'] = original_data['prediction'].astype(int)
+
+              original_data1 = original_data[['store','prediction']].groupby('store').sum().reset_index()
+
+              return original_data1.to_json(orient = 'records', date_format = 'iso')
 
